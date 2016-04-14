@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/11 15:13:31 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/13 17:17:00 by kpiacent         ###   ########.fr       */
+/*   Created: 2016/04/11 15:18:19 by kpiacent          #+#    #+#             */
+/*   Updated: 2016/04/14 10:04:26 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#ifndef FT_LS_H
+# define FT_LS_H
 
-int		main(int ac, char **av)
-{
-	(void)ac;
-	dir_showcontent(av[1]);
-}
+#include <stdio.h>
+#include "../libft/libft.h"
+#include <dirent.h>
+
+/*
+**	LIST.C
+*/
+
+
+
+/*
+**	DIR.C
+*/
+
+void		dir_showcontent(const char *dirname);
+
+#endif
