@@ -6,11 +6,20 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/15 20:20:19 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/15 21:30:49 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	file_putname(t_filedata *item)
+{
+	ft_putendl(item->filename);
+}
+void	file_putallname(t_vector *v)
+{
+	ft_vectforeach(v, (void *)&file_putname);
+}
 
 t_filedata	*file_initdata(char *path)
 {
