@@ -6,14 +6,28 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/15 21:30:49 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/16 09:16:15 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+char	*file_getpath(char *basepath, char *filename)
+{
+	char		*path;
+
+	if (basepath[ft_strlen(basepath) - 1] != '/')
+		basepath = ft_strjoin(basepath, "/");
+	path = ft_strjoin(basepath, filename);
+	return (path);
+}
+
 void	file_putname(t_filedata *item)
 {
+	if (S_ISDIR(item->stat->st_mode))
+		ft_putstr("DIR: ");
+	if (S_ISREG(item->stat->st_mode))
+		ft_putstr("REG: ");
 	ft_putendl(item->filename);
 }
 void	file_putallname(t_vector *v)
@@ -21,14 +35,17 @@ void	file_putallname(t_vector *v)
 	ft_vectforeach(v, (void *)&file_putname);
 }
 
-t_filedata	*file_initdata(char *path)
+t_filedata	*file_initdata(const char *basepath, char *filename)
 {
 	t_filedata *filedata;
 
 	if (!(filedata = ft_memalloc(sizeof(t_filedata) * 1)))
 		return (NULL);
-	filedata->filedir = ft_strdup("test");
-	filedata->filename = path;
-	stat(path, filedata->stat);
+	filedata->basepath = ft_strdup(basepath);
+	filedata->filename = ft_strdup(filename);
+	filedata->path = file_getpath(filedata->basepath, filedata->filename); // should fix the const char issue.
+	if (!(filedata->stat = ft_memalloc(sizeof(struct stat) * 1)))
+		return (NULL);
+	lstat(filedata->path, filedata->stat);
 	return (filedata);
 }

@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:18:19 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/15 21:27:19 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/16 09:06:35 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 
 typedef struct			s_filedata
 {
-	char				*filedir;
+	char				*basepath;
 	char				*filename;
+	char				*path;
 	struct stat			*stat;
 }						t_filedata;
 
-t_filedata				*file_initdata(char *path);
+t_filedata				*file_initdata(const char *basepath, char *filename);
 void					file_putallname(t_vector *v);
 void					file_putname(t_filedata *item);
 
