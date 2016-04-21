@@ -1,4 +1,4 @@
-# FT_LS 
+# FT_LS
 The project goal is to recode the LS function present in unix system using C programming language.
 
 ## Allowed functions:
@@ -135,16 +135,16 @@ struct stat { /* when _DARWIN_FEATURE_64_BIT_INODE is NOT defined */
      u_long   st_gen;    /* file generation number */
  };
  ```
- 
+
 ### 4. Process to store passed options
- 
+
 -> when an option is passed as param, ls function will raise a flag using bitwise in an unsigned int. Ex:
 ``` shell
     unsigned int i = 0;
     bit value : 0000 0000 0000 0000 0000 0000 0000 0000
     considering supported options : d,g,f,u,t,r,a,R,l
-    all flags raised, bit value: 
-    
+    all flags raised, bit value:
+
     options:                    d gfut raRl
     0000 0000 0000 0000 0000 0001 1111 1111
     index:                      8 7654 3210
@@ -152,17 +152,29 @@ struct stat { /* when _DARWIN_FEATURE_64_BIT_INODE is NOT defined */
 
 ### 5. How to store directory's content data
 
+Each file contained in a directory is stored in a vector following the process below:
 
-``` shell
-typedef struct ls_list  s_ls_list
+``` c
+t_vector *v;
+
+v = ft_vectnew();
+dir_storecontent(path, v);
+
+then we got:
+v->total // amount of stored files (including . and ..)
+v->item[i] // contain the file content at index i
+
+```
+
+The item is stored in a structure typedefed as t_filedata;
+
+``` c
+typedef struct		s_filedata
 {
-    char *name;
-    int  type;
-    struct *stat; //all values returned by the stat function.
-    struct ls_list *next;
-    struct ls_list *prev;
-    struct ls_list *head;
-}                       t_ls_list;
+    char			*basepath; //the relative path to the parent dir of file
+	char			*filename; //name of file
+	char			*path;     //the relative path to the file (basepath + / + filename);
+}                  t_filedata;
 
 ```
 
@@ -188,17 +200,4 @@ typedef struct ls_list  s_ls_list
 - no file or dir
 
 To be continued...
-
-
-
-
-
-
-
-
-
-
-
-
-
 

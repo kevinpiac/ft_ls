@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/21 14:15:53 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/21 14:38:34 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	file_recursive(t_vector *v)
 		i++;
 	}
 }
-
 
 // this function is working but require changes.
 void	file_ls(char *path)
