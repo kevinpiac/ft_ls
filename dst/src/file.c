@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/16 09:16:15 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/21 14:15:53 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,45 @@ void	file_putname(t_filedata *item)
 		ft_putstr("REG: ");
 	ft_putendl(item->filename);
 }
+
+// recursive concept is working but require changes.
+void	file_recursive(t_vector *v)
+{
+	int			i;
+	t_filedata	*item;
+
+	i = 0;
+	while (i < (v->total))
+	{
+		item = v->items[i];
+		if (ft_strcmp(item->filename, ".") && ft_strcmp(item->filename, ".."))
+		{
+			if (S_ISDIR(item->stat->st_mode))
+			{
+				ft_putendl(item->path);
+				file_ls(item->path);
+			}
+		}
+		i++;
+	}
+}
+
+
+// this function is working but require changes.
+void	file_ls(char *path)
+{
+	t_vector	*v;
+	int			recursive;
+	int			i;
+
+	i = 0;
+	recursive = 1;
+	v = ft_vectnew();
+	dir_storecontent(path, v);
+	file_putallname(v);
+	file_recursive(v);
+}
+
 void	file_putallname(t_vector *v)
 {
 	ft_vectforeach(v, (void *)&file_putname);
