@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/21 14:38:34 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/28 16:13:06 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	file_putname(t_filedata *item)
 	ft_putendl(item->filename);
 }
 
-// recursive concept is working but require changes.
 void	file_recursive(t_vector *v)
 {
 	int			i;
@@ -46,26 +45,24 @@ void	file_recursive(t_vector *v)
 			if (S_ISDIR(item->stat->st_mode))
 			{
 				ft_putendl(item->path);
-				file_ls(item->path);
+				file_ls(item->path, true);
 			}
 		}
 		i++;
 	}
 }
 
-// this function is working but require changes.
-void	file_ls(char *path)
+void	file_ls(char *path, t_bool recursive)
 {
 	t_vector	*v;
-	int			recursive;
 	int			i;
 
 	i = 0;
-	recursive = 1;
 	v = ft_vectnew();
 	dir_storecontent(path, v);
 	file_putallname(v);
-	file_recursive(v);
+	if (recursive)
+		file_recursive(v);
 }
 
 void	file_putallname(t_vector *v)

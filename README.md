@@ -162,7 +162,7 @@ dir_storecontent(path, v);
 
 then we got:
 v->total // amount of stored files (including . and ..)
-v->item[i] // contain the file content at index i
+v->items[i] // contain the file content at index i
 
 ```
 

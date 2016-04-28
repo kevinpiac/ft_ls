@@ -6,12 +6,13 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:16:41 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/16 09:06:49 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/27 09:56:31 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
+//unused at this time
 void	dir_showcontent(const char *dirpath)
 {
 	DIR				*dp;
