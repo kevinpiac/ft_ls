@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/11 15:13:31 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 12:58:00 by kpiacent         ###   ########.fr       */
+/*   Created: 2016/04/30 13:17:58 by kpiacent          #+#    #+#             */
+/*   Updated: 2016/04/30 14:57:58 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
+void		sort_lexico(t_vector *v)
 {
-	t_vector		*arm;
-	t_vector		*config;
-	t_opm_params	*opm;
-	int				i;
-	char			*path;
+	int			i;
+	t_filedata	*tmp;
+	t_filedata	*file;
+	t_filedata	*next;
 
-	arm = arm_init(ac, av);
-	config = opm_config_init("l,r,a|All|all,R|Recursive|recursive,t,u,f,g,d");
-	opm = opm_init(arm, config);
-	arm_debug(arm);
-	opm_debug(opm);
 	i = 0;
-	while (i < opm->params->total)
+	while (i < v->total - 1)
 	{
-		path = arm_getparam_name(opm->params, i);
-		file_ls(path, opm);
+		file = ft_vectget(v, i);
+		next = ft_vectget(v, i + 1);
+		if (ft_strcmp(file->filename, next->filename) > 0)
+		{
+			tmp = v->items[i];
+			v->items[i] = v->items[i + 1];
+			v->items[i + 1] = tmp;
+			i = -1;
+		}
 		i++;
 	}
-	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 11:32:02 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 14:59:02 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	file_putallname(t_vector *v)
 	ft_vectforeach(v, (void *)&file_putname);
 }
 
-void	file_recursive(t_vector *v)
+void	file_recursive(t_vector *v, t_opm_params *opm)
 {
 	int			i;
 	t_filedata	*item;
@@ -52,16 +52,13 @@ void	file_recursive(t_vector *v)
 		if (ft_strcmp(item->filename, ".") && ft_strcmp(item->filename, ".."))
 		{
 			if (S_ISDIR(item->stat->st_mode))
-			{
-				ft_putendl(item->path);
-				file_ls(item->path, true);
-			}
+				file_ls(item->path, opm);
 		}
 		i++;
 	}
 }
 
-void	file_ls(char *path, t_bool recursive)
+void	file_ls(char *path, t_opm_params *opm)
 {
 	t_vector	*v;
 	int			i;
@@ -69,12 +66,11 @@ void	file_ls(char *path, t_bool recursive)
 	i = 0;
 	v = ft_vectnew();
 	dir_storecontent(path, v);
+	sort_lexico(v);
 	file_putallname(v);
-	if (recursive)
-		file_recursive(v);
+	if (opm_issetoption(opm->config, "R"))
+		file_recursive(v, opm);
 }
-
-
 
 t_filedata	*file_initdata(const char *basepath, char *filename)
 {
