@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:18:19 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 14:13:31 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 15:40:28 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ t_filedata				*file_initdata(const char *basepath, char *filename);
 void					file_putallname(t_vector *v);
 void					file_putname(t_filedata *item);
 void					file_ls(char *path, t_opm_params *opm);
+
+/*
+**	PRINT.C
+*/
+
+void					print_all(t_vector *v, t_opm_params *opm);
 
 /*
 **	DIR.C

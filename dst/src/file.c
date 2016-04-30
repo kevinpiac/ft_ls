@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 14:59:02 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 15:08:35 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	file_ls(char *path, t_opm_params *opm)
 	v = ft_vectnew();
 	dir_storecontent(path, v);
 	sort_lexico(v);
-	file_putallname(v);
+	print_all(v, opm);
 	if (opm_issetoption(opm->config, "R"))
 		file_recursive(v, opm);
 }
