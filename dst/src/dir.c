@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 16:16:41 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/27 09:56:31 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 11:32:15 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	dir_storecontent(const char *dirpath, t_vector *v)
 		perror("ls");
 		return ;
 	}
+	ft_putendl(dirpath);
 	while ((ret = readdir(dp)))
 	{
 		filedata = file_initdata(dirpath, ret->d_name);
-		ft_vectadd(v, (t_filedata *)filedata);
+		ft_vectadd(v, filedata); // cause issue with small vect capacity.
 	}
 	(void)closedir(dp);
 }

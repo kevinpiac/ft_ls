@@ -6,12 +6,12 @@
 #    By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/04/10 16:54:54 by kpiacent          #+#    #+#              #
-#    Updated: 2016/04/15 20:19:28 by kpiacent         ###   ########.fr        #
+#    Updated: 2016/04/28 18:41:08 by kpiacent         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 NAME = ft_ls
 L_DIR = libft
 F_DIR = src

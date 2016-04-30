@@ -6,29 +6,38 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/28 16:13:06 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 11:32:02 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*file_getpath(char *basepath, char *filename)
+char	*file_getpath(const char *basepath, char *filename)
 {
 	char		*path;
+	char		*basepathendl;
 
 	if (basepath[ft_strlen(basepath) - 1] != '/')
-		basepath = ft_strjoin(basepath, "/");
-	path = ft_strjoin(basepath, filename);
+		basepathendl = ft_strjoin(basepath, "/");
+	else
+		basepathendl = ft_strdup(basepath);
+	path = ft_strjoin(basepathendl, filename);
+	free(basepathendl);
 	return (path);
 }
 
-void	file_putname(t_filedata *item)
+void	file_putname(t_filedata *item) //causes a segfault
 {
 	if (S_ISDIR(item->stat->st_mode))
 		ft_putstr("DIR: ");
 	if (S_ISREG(item->stat->st_mode))
 		ft_putstr("REG: ");
 	ft_putendl(item->filename);
+}
+
+void	file_putallname(t_vector *v)
+{
+	ft_vectforeach(v, (void *)&file_putname);
 }
 
 void	file_recursive(t_vector *v)
@@ -65,22 +74,19 @@ void	file_ls(char *path, t_bool recursive)
 		file_recursive(v);
 }
 
-void	file_putallname(t_vector *v)
-{
-	ft_vectforeach(v, (void *)&file_putname);
-}
+
 
 t_filedata	*file_initdata(const char *basepath, char *filename)
 {
-	t_filedata *filedata;
+	t_filedata	*filedata;
+	struct stat	*stat;
 
-	if (!(filedata = ft_memalloc(sizeof(t_filedata) * 1)))
-		return (NULL);
+	filedata = (t_filedata *)ft_memalloc(sizeof(t_filedata) * 1);
 	filedata->basepath = ft_strdup(basepath);
 	filedata->filename = ft_strdup(filename);
-	filedata->path = file_getpath(filedata->basepath, filedata->filename); // should fix the const char issue.
-	if (!(filedata->stat = ft_memalloc(sizeof(struct stat) * 1)))
-		return (NULL);
-	lstat(filedata->path, filedata->stat);
+	filedata->path = file_getpath(basepath, filename);
+	stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
+	lstat(filedata->path, stat);
+	filedata->stat = stat;
 	return (filedata);
 }
