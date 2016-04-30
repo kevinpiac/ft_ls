@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 20:15:18 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 15:08:35 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 18:05:34 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,6 @@ char	*file_getpath(const char *basepath, char *filename)
 	path = ft_strjoin(basepathendl, filename);
 	free(basepathendl);
 	return (path);
-}
-
-void	file_putname(t_filedata *item) //causes a segfault
-{
-	if (S_ISDIR(item->stat->st_mode))
-		ft_putstr("DIR: ");
-	if (S_ISREG(item->stat->st_mode))
-		ft_putstr("REG: ");
-	ft_putendl(item->filename);
-}
-
-void	file_putallname(t_vector *v)
-{
-	ft_vectforeach(v, (void *)&file_putname);
 }
 
 void	file_recursive(t_vector *v, t_opm_params *opm)

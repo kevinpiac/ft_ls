@@ -6,7 +6,7 @@
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/11 15:13:31 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 12:58:00 by kpiacent         ###   ########.fr       */
+/*   Updated: 2016/04/30 17:53:40 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int		main(int ac, char **av)
 	arm = arm_init(ac, av);
 	config = opm_config_init("l,r,a|All|all,R|Recursive|recursive,t,u,f,g,d");
 	opm = opm_init(arm, config);
-	arm_debug(arm);
-	opm_debug(opm);
+//	arm_debug(arm);
+//	opm_debug(opm);
 	i = 0;
 	while (i < opm->params->total)
 	{
