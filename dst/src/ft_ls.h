@@ -21,6 +21,14 @@
 #include <grp.h>
 
 /*
+**	LIST.C
+*/
+
+void					list_dir(char *path, t_opm_params *opm);
+void 					list_files(t_opm_params *opm);
+void 					list_directories(t_opm_params *opm);
+
+/*
 **	FILE.C
 */
 
@@ -33,8 +41,7 @@ typedef struct			s_filedata
 }						t_filedata;
 
 t_filedata				*file_initdata(const char *basepath, char *filename);
-void					file_ls(char *path, t_opm_params *opm);
-
+void					file_recursive(t_vector *v, t_opm_params *opm);
 /*
 **	PRINT.C
 */
@@ -42,10 +49,17 @@ void					file_ls(char *path, t_opm_params *opm);
 void					print_all(t_vector *v, t_opm_params *opm);
 
 /*
+**	IS.C
+*/
+
+t_bool				is_reg(const char *path);
+t_bool				is_dir(const char *path);
+
+/*
 **	DIR.C
 */
 
-void					dir_storecontent(const char *dirname, t_vector *v);
+void					dir_storecontent(const char *dirname, t_vector *v, t_opm_params *opm);
 void					dir_showcontent(const char *dirname);
 t_list					*dir_contenttolist(const char *dirname);
 

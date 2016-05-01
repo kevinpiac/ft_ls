@@ -30,22 +30,34 @@ void	dir_showcontent(const char *dirpath)
 	(void)closedir(dp);
 }
 
-void	dir_storecontent(const char *dirpath, t_vector *v)
+void	dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 {
 	DIR				*dp;
 	struct dirent	*ret;
 	t_filedata		*filedata;
 
-	if (!(dp = opendir(dirpath)))
+	if (is_reg(dirpath))
+		ft_vectadd(v, file_initdata(dirpath, NULL));
+	else
 	{
-		perror("ls");
-		return ;
+		if (!(dp = opendir(dirpath)))
+		{
+			perror("ls");
+			return ;
+		}
+		else
+		{
+			while ((ret = readdir(dp)))
+			{
+				if ((!ft_strequ(ret->d_name, ".") &&
+					!ft_strequ(ret->d_name, "..")) ||
+					opm_issetoption(opm->config, "a"))
+				{
+					filedata = file_initdata(dirpath, ret->d_name);
+					ft_vectadd(v, filedata); // cause issue with small vect capacity.
+				}
+			}
+			(void)closedir(dp);
+		}
 	}
-	ft_putendl(dirpath);
-	while ((ret = readdir(dp)))
-	{
-		filedata = file_initdata(dirpath, ret->d_name);
-		ft_vectadd(v, filedata); // cause issue with small vect capacity.
-	}
-	(void)closedir(dp);
 }

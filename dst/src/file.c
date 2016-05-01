@@ -38,24 +38,10 @@ void	file_recursive(t_vector *v, t_opm_params *opm)
 		if (ft_strcmp(item->filename, ".") && ft_strcmp(item->filename, ".."))
 		{
 			if (S_ISDIR(item->stat->st_mode))
-				file_ls(item->path, opm);
+				list_dir(item->path, opm);
 		}
 		i++;
 	}
-}
-
-void	file_ls(char *path, t_opm_params *opm)
-{
-	t_vector	*v;
-	int			i;
-
-	i = 0;
-	v = ft_vectnew();
-	dir_storecontent(path, v);
-	sort_lexico(v);
-	print_all(v, opm);
-	if (opm_issetoption(opm->config, "R"))
-		file_recursive(v, opm);
 }
 
 t_filedata	*file_initdata(const char *basepath, char *filename)
@@ -65,8 +51,16 @@ t_filedata	*file_initdata(const char *basepath, char *filename)
 
 	filedata = (t_filedata *)ft_memalloc(sizeof(t_filedata) * 1);
 	filedata->basepath = ft_strdup(basepath);
-	filedata->filename = ft_strdup(filename);
-	filedata->path = file_getpath(basepath, filename);
+	if (filename)
+	{
+		filedata->filename = ft_strdup(filename);
+		filedata->path = file_getpath(basepath, filename);
+	}
+	else
+	{
+		filedata->filename = ft_strdup(basepath);
+		filedata->path = ft_strdup(basepath);
+	}
 	stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
 	lstat(filedata->path, stat);
 	filedata->stat = stat;
