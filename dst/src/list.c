@@ -41,8 +41,8 @@ void            list_files(t_opm_params *opm)
 
 void            list_directories(t_opm_params *opm)
 {
-    int       i;
-    char      *path;
+    int         i;
+    char        *path;
 
     i = 0;
     while (i < opm->params->total)

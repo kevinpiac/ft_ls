@@ -25,6 +25,7 @@ int		main(int ac, char **av)
 //	opm_debug(opm);
 	if (!opm->params->total)
 		ft_vectadd(opm->params, arm_argument_new(".", "param"));
+	sort_lexico(opm->params);
 	list_files(opm);
 	list_directories(opm);
 	return (1);
