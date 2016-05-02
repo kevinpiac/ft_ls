@@ -78,19 +78,33 @@ int				get_biggestsize(t_vector *v)
 	return (i);
 }
 
+char 					*get_time(t_filedata *file)
+{
+	time_t		time;
+	char 			*d;
+	char			*date;
+
+	time = file->stat->st_mtime;
+	d = ft_strsub(ctime(&time), 4, 13);
+	date = ft_strjoin(d, " ");
+	free(d);
+	return (date);
+}
+
 static void		print_size(int	max_size, t_filedata *file)
 {
 	int		i;
 	int		filesize;
 
 	filesize = file->stat->st_size;
-	i = 0;
+	i = filesize ? 0 : 1;
 	while (filesize > 0)
 	{
 		filesize /= 10;
 		i++;
 	}
-	while (max_size - i > 1)
+	max_size = max_size - i;
+	while (max_size > 0)
 	{
 		ft_putchar(' ');
 		max_size--;
@@ -100,27 +114,26 @@ static void		print_size(int	max_size, t_filedata *file)
 
 static void		print_long(t_vector *v)
 {
-	int			i;
+	int					i;
 	t_filedata	*file;
-	char		*rights;
-	int			max_size;
+	int					max_size;
 
 	max_size = get_biggestsize(v);
 	i = 0;
 	while (i < v->total)
 	{
 		file = ft_vectget(v, i);
-		rights = get_rights(file);
-		ft_putstr(rights);
+		ft_putstr(get_rights(file));
 		ft_putstr("  ");
-		ft_putnbr(6);
+		ft_putnbr(file->stat->st_nlink);
 		ft_putstr(" ");
 		ft_putstr(get_user(file));
 		ft_putstr("  ");
 		ft_putstr(get_group(file));
 		ft_putstr("  ");
 		print_size(max_size, file);
-		ft_putstr(" Apr 16 09:09 "); // should add the real date here. and think about devices.
+		ft_putstr(" ");
+		ft_putstr(get_time(file));
 		ft_putendl(file->filename);
 		i++;
 	}
