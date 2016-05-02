@@ -9,10 +9,7 @@ void            list_dir(char *path, t_opm_params *opm)
   v = ft_vectnew();
   dir_storecontent(path, v, opm);
   sort_lexico(v); // replace by a unique print function.
-  ft_putendl("");
-  ft_putendl(ft_strjoin(path, ":"));
-  ft_putendl("total 123");
-  print_all(v, opm);
+  print_all(path, v, opm);
   if (opm_issetoption(opm->config, "R"))
     file_recursive(v, opm);
 }
@@ -33,10 +30,7 @@ void            list_files(t_opm_params *opm)
         i++;
     }
     if (v->total)
-    {
-        sort_lexico(v);
-        print_all(v, opm);
-    }
+        print_all(NULL, v, opm);
 }
 
 void            list_directories(t_opm_params *opm)

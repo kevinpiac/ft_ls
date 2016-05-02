@@ -46,7 +46,7 @@ void					file_recursive(t_vector *v, t_opm_params *opm);
 **	PRINT.C
 */
 
-void					print_all(t_vector *v, t_opm_params *opm);
+void					print_all(char *dirname, t_vector *v, t_opm_params *opm);
 
 /*
 **	IS.C
