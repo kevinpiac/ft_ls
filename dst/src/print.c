@@ -85,7 +85,7 @@ char 					*get_time(t_filedata *file)
 	char			*date;
 
 	time = file->stat->st_mtime;
-	d = ft_strsub(ctime(&time), 4, 13);
+	d = ft_strsub(ctime(&time), 4, 12);
 	date = ft_strjoin(d, " ");
 	free(d);
 	return (date);
@@ -155,7 +155,11 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 		ft_putendl(ft_strjoin(dirname, ":"));
 	once++;
 	if (opm_issetoption(opm->config, "l"))
+	{
+		if (dirname)
+			ft_putendl("total 16");
 		print_long(v);
+	}
 	else
 		ft_vectforeach(v, (void *)&print_filename);
 }
