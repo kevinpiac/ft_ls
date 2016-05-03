@@ -30,7 +30,7 @@ void	dir_showcontent(const char *dirpath)
 	(void)closedir(dp);
 }
 
-void	dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
+char 	*dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 {
 	DIR				*dp;
 	struct dirent	*ret;
@@ -41,10 +41,7 @@ void	dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 	else
 	{
 		if (!(dp = opendir(dirpath)))
-		{
-			perror("ls");
-			return ;
-		}
+			return(ft_strjoin("ls: ", strerror(errno)));//			perror("ls");
 		else
 		{
 			while ((ret = readdir(dp)))
@@ -60,4 +57,5 @@ void	dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 			(void)closedir(dp);
 		}
 	}
+	return (NULL);
 }

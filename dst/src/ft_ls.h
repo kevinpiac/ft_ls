@@ -20,6 +20,8 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
+#include <string.h>
+#include <errno.h>
 
 /*
 **	LIST.C
@@ -60,7 +62,7 @@ t_bool				is_dir(const char *path);
 **	DIR.C
 */
 
-void					dir_storecontent(const char *dirname, t_vector *v, t_opm_params *opm);
+char					*dir_storecontent(const char *dirname, t_vector *v, t_opm_params *opm);
 void					dir_showcontent(const char *dirname);
 t_list					*dir_contenttolist(const char *dirname);
 
