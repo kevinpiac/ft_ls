@@ -46,12 +46,10 @@ char 	*dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 		{
 			while ((ret = readdir(dp)))
 			{
-				if ((!ft_strequ(ret->d_name, ".") &&
-					!ft_strequ(ret->d_name, "..")) ||
-					opm_issetoption(opm->config, "a"))
+				if (ret->d_name[0] != '.' || opm_issetoption(opm->config, "a"))
 				{
 					filedata = file_initdata(dirpath, ret->d_name);
-					ft_vectadd(v, filedata); // cause issue with small vect capacity.
+					ft_vectadd(v, filedata);
 				}
 			}
 			(void)closedir(dp);

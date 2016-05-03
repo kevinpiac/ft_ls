@@ -168,7 +168,7 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 	once = 0;
 	if (!once && dirname && opm->params->total > 1)
 		ft_putendl("");
-	if (!once && dirname)
+	if (once && dirname)
 		ft_putendl(ft_strjoin(dirname, ":"));
 	once++;
 	if (opm_issetoption(opm->config, "l"))
