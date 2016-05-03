@@ -1,4 +1,3 @@
-
 ../tests/:
 total 0
 drwxr-xr-x  3 kevin  staff  102 May  3 07:08 dir1
@@ -8,18 +7,16 @@ drwxr-xr-x  3 kevin  staff  102 May  3 07:08 dir3
 -rw-r--r--  1 kevin  staff    0 May  3 07:08 file2
 -rw-r--r--  1 kevin  staff    0 May  3 07:08 file3
 
-../tests/dir1:
+../tests//dir1:
 total 0
 -rw-r--r--  1 kevin  staff  0 May  3 07:08 inDIR1
 
-../tests/dir3:
+../tests//dir3:
 total 1560
 -rw-r--r--  1 kevin  staff  796224 May  3 07:08 coucou
 
 libft/:
-total 1824
--rw-r--r--  1 kevin  staff     37 May  3 07:09 .git
--rw-r--r--  1 kevin  staff     88 May  3 07:09 .gitignore
+total 1808
 -rw-r--r--  1 kevin  staff   2986 May  3 07:09 Makefile
 -rw-r--r--  1 kevin  staff   1141 May  3 07:09 arm_argument_new.c
 -rw-r--r--  1 kevin  staff    712 May  3 07:32 arm_argument_new.o

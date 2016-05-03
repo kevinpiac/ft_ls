@@ -1,19 +1,22 @@
-src/dir.c
+-rw-r--r--  1 kevin  staff  1786 May  3 07:08 src/dir.c
+-rw-r--r--  1 kevin  staff  1273 May  3 07:08 src/sort.c
 
-../tests:
-dir1
-dir3
-empty
-file1
-file2
-file3
+../tests/:
+total 0
+drwxr-xr-x  3 kevin  staff  102 May  3 07:08 dir1
+drwxr-xr-x  3 kevin  staff  102 May  3 07:08 dir3
+-rw-r--r--  1 kevin  staff    0 May  3 07:08 empty
+-rw-r--r--  1 kevin  staff    0 May  3 07:08 file1
+-rw-r--r--  1 kevin  staff    0 May  3 07:08 file2
+-rw-r--r--  1 kevin  staff    0 May  3 07:08 file3
 
-src:
-dir.c
-file.c
-ft_ls.h
-is.c
-list.c
-main.c
-print.c
-sort.c
+src/:
+total 64
+-rw-r--r--  1 kevin  staff  1786 May  3 07:08 dir.c
+-rw-r--r--  1 kevin  staff  2097 May  3 07:08 file.c
+-rw-r--r--  1 kevin  staff  1924 May  3 07:08 ft_ls.h
+-rw-r--r--  1 kevin  staff  1271 May  3 07:08 is.c
+-rw-r--r--  1 kevin  staff   984 May  3 07:08 list.c
+-rw-r--r--  1 kevin  staff  1339 May  3 07:08 main.c
+-rw-r--r--  1 kevin  staff  4056 May  3 07:32 print.c
+-rw-r--r--  1 kevin  staff  1273 May  3 07:08 sort.c

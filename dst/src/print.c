@@ -91,6 +91,23 @@ char 					*get_time(t_filedata *file)
 	return (date);
 }
 
+int 			get_total_blocks(t_vector *v)
+{
+	int				i;
+	int				total;
+	t_filedata		*file;
+
+	i = 0;
+	total = 0;
+	while (i < v->total)
+	{
+		file = ft_vectget(v, i);
+		total += file->stat->st_blocks;
+		i++;
+	}
+	return (total);
+}
+
 static void		print_size(int	max_size, t_filedata *file)
 {
 	int		i;
@@ -157,7 +174,11 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 	if (opm_issetoption(opm->config, "l"))
 	{
 		if (dirname)
-			ft_putendl("total 16");
+		{
+			ft_putstr("total ");
+			ft_putnbr(get_total_blocks(v));
+			ft_putendl("");
+		}
 		print_long(v);
 	}
 	else
