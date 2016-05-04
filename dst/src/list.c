@@ -31,7 +31,7 @@ void            list_files(t_vector *files, t_opm_params *opm)
 
 void            list_directories(t_vector *dirs, t_opm_params *opm)
 {
-    int     i;
+    int             i;
     t_filedata      *dir;
 
     i = 0;

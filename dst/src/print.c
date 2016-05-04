@@ -168,12 +168,12 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 	once = once ? once : 1;
 	if (dirname && once > 1)
 		ft_putendl("");
-	if (dirname && opm->params->total > 1)// ok
+	if (dirname && (once > 1 || opm->params->total > 1))// ok
 		ft_putendl(ft_strjoin(dirname, ":"));
 	once++;
 	if (opm_issetoption(opm->config, "l"))
 	{
-		if (dirname)
+		if (dirname && v->total)
 		{
 			ft_putstr("total ");
 			ft_putnbr(get_total_blocks(v));
