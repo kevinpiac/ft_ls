@@ -34,6 +34,24 @@ char			*get_group(t_filedata *file)
 	return (ft_itoa(id));
 }
 
+static char 	get_filetype(t_filedata *file)
+{
+	if (S_ISBLK(file->stat->st_mode))
+		return ('b');
+	else if (S_ISCHR(file->stat->st_mode))
+		return ('c');
+	else if (S_ISDIR(file->stat->st_mode))
+		return ('d');
+	else if (S_ISLNK(file->stat->st_mode))
+		return ('l');
+	else if (S_ISSOCK(file->stat->st_mode))
+		return ('s');
+	else if (S_ISFIFO(file->stat->st_mode))
+		return ('p');
+	else
+		return ('-');
+}
+
 char			*get_rights(t_filedata *file)
 {
 	char	*rights;
@@ -41,7 +59,7 @@ char			*get_rights(t_filedata *file)
 
 	i = 0;
 	rights = ft_strnew(10);
-	rights[i++] = (S_ISDIR(file->stat->st_mode)) ? 'd' : '-';
+	rights[i++] = get_filetype(file);
 	rights[i++] = (file->stat->st_mode & S_IRUSR) ? 'r' : '-';
 	rights[i++] = (file->stat->st_mode & S_IWUSR) ? 'w' : '-';
 	rights[i++] = (file->stat->st_mode & S_IXUSR) ? 'x' : '-';
@@ -54,10 +72,10 @@ char			*get_rights(t_filedata *file)
 	return (rights);
 }
 
-int				get_biggestsize(t_vector *v)
+int			get_biggestsize(t_vector *v)
 {
 	int			i;
-	int			size;
+	int 		size;
 	t_filedata	*file;
 
 	size = 0;
@@ -65,8 +83,7 @@ int				get_biggestsize(t_vector *v)
 	while (i < v->total)
 	{
 		file = ft_vectget(v, i);
-		if (size < file->stat->st_size)
-			size = file->stat->st_size;
+		size = size < file->stat->st_size ? file->stat->st_size : size;
 		i++;
 	}
 	i = 0;
@@ -78,7 +95,30 @@ int				get_biggestsize(t_vector *v)
 	return (i);
 }
 
-char 					*get_time(t_filedata *file)
+int			get_biggestlink(t_vector *v)
+{
+	int			i;
+	int			size;
+	t_filedata	*file;
+
+	size = 0;
+	i = 0;
+	while (i < v->total)
+	{
+		file = ft_vectget(v, i);
+		size = size < file->stat->st_nlink ? file->stat->st_nlink : size;
+		i++;
+	}
+	i = 0;
+	while (size > 0)
+	{
+		size /= 10;
+		i++;
+	}
+	return (i);
+}
+
+char 			*get_time(t_filedata *file)
 {
 	time_t		time;
 	char 			*d;
@@ -108,12 +148,12 @@ int 			get_total_blocks(t_vector *v)
 	return (total);
 }
 
-static void		print_size(int	max_size, t_filedata *file)
+static void		right_aligned(int	max_size, int nbr)
 {
 	int		i;
 	int		filesize;
 
-	filesize = file->stat->st_size;
+	filesize = nbr;
 	i = filesize ? 0 : 1;
 	while (filesize > 0)
 	{
@@ -126,29 +166,33 @@ static void		print_size(int	max_size, t_filedata *file)
 		ft_putchar(' ');
 		max_size--;
 	}
-	ft_putnbr(file->stat->st_size);
+	ft_putnbr(nbr);
 }
+
+//static char 	*get_padding()
 
 static void		print_long(t_vector *v)
 {
 	int					i;
-	t_filedata	*file;
+	t_filedata			*file;
 	int					max_size;
+	int					max_links;
 
 	max_size = get_biggestsize(v);
+	max_links = get_biggestlink(v);
 	i = 0;
 	while (i < v->total)
 	{
 		file = ft_vectget(v, i);
 		ft_putstr(get_rights(file));
 		ft_putstr("  ");
-		ft_putnbr(file->stat->st_nlink);
+		right_aligned(max_links, file->stat->st_nlink);
 		ft_putstr(" ");
 		ft_putstr(get_user(file));
 		ft_putstr("  ");
 		ft_putstr(get_group(file));
 		ft_putstr("  ");
-		print_size(max_size, file);
+		right_aligned(max_size, file->stat->st_size);
 		ft_putstr(" ");
 		ft_putstr(get_time(file));
 		ft_putendl(file->filename);
