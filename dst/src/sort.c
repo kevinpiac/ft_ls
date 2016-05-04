@@ -12,6 +12,16 @@
 
 #include "ft_ls.h"
 
+void 		sort(t_vector *v, t_opm_params *opm)
+{
+	if (opm_issetoption(opm->config, "r"))
+		ft_putendl("have to sort with option r");
+	else if (opm_issetoption(opm->config, "t"))
+		ft_putendl("have to sort with option t");
+	else
+		sort_lexico(v);
+}
+
 void		sort_lexico(t_vector *v)
 {
 	int			i;

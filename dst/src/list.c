@@ -11,50 +11,40 @@ void            list_dir(char *path, t_opm_params *opm)
     if ((error = dir_storecontent(path, v, opm)))
     {
         if (opm->params->total > 1)
-        {
             ft_putendl(ft_strjoin(path, ":"));
-        }
         ft_putendl(error);
     }
     else
     {
-        sort_lexico(v); // replace by a unique print function.
+        sort(v, opm);
         print_all(path, v, opm);
         if (opm_issetoption(opm->config, "R"))
         file_recursive(v, opm);
     }
 }
 
-void            list_files(t_opm_params *opm)
+void            list_files(t_vector *files, t_opm_params *opm)
 {
-    int         i;
-    char        *path;
-    t_vector    *v;
-
-    v = ft_vectnew();
-    i = 0;
-    while (i < opm->params->total)
-    {
-        path = arm_getparam_name(opm->params, i);
-        if (!is_dir(path))
-            ft_vectadd(v, file_initdata(path, NULL));
-        i++;
-    }
-    if (v->total)
-        print_all(NULL, v, opm);
+    if (files->total)
+        print_all(NULL, files, opm);
 }
 
-void            list_directories(t_opm_params *opm)
+void            list_directories(t_vector *dirs, t_opm_params *opm)
 {
-    int         i;
-    char        *path;
+    int     i;
+    t_filedata      *dir;
 
     i = 0;
-    while (i < opm->params->total)
+    while (i < dirs->total)
     {
-      path = arm_getparam_name(opm->params, i);
-      if (is_dir(path))
-          list_dir(path, opm);
+        dir = ft_vectget(dirs, i);
+        list_dir(dir->filename, opm);
       i++;
     }
+}
+
+void            list(t_files *to_list, t_opm_params *opm)
+{
+    list_files(to_list->files, opm);
+    list_directories(to_list->dirs, opm);
 }

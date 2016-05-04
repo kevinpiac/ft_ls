@@ -16,7 +16,8 @@ NAME = ft_ls
 L_DIR = libft
 F_DIR = src
 H_DIR = src
-FILES = $(F_DIR)/main.c $(F_DIR)/dir.c $(F_DIR)/file.c $(F_DIR)/sort.c $(F_DIR)/print.c $(F_DIR)/is.c $(F_DIR)/list.c
+FILES = $(F_DIR)/main.c $(F_DIR)/dir.c $(F_DIR)/file.c $(F_DIR)/sort.c \
+$(F_DIR)/print.c $(F_DIR)/is.c $(F_DIR)/list.c $(F_DIR)/dispatch.c
 
 TMP = Makefile~  $(F_DIR)/$(NAME).h~ $(NAME)~ $(FILES:.c=.c~)
 

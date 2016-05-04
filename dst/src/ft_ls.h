@@ -23,13 +23,26 @@
 #include <string.h>
 #include <errno.h>
 
+typedef struct		s_files
+{
+	t_vector		*files;
+	t_vector		*dirs;
+}					t_files;
+
+/*
+**	DISPATCH.C
+*/
+
+t_files					*dispatch(t_opm_params *opm);
+
 /*
 **	LIST.C
 */
 
+void 					list(t_files *to_list, t_opm_params *opm);
 void					list_dir(char *path, t_opm_params *opm);
-void 					list_files(t_opm_params *opm);
-void 					list_directories(t_opm_params *opm);
+void 					list_files(t_vector *files, t_opm_params *opm);
+void 					list_directories(t_vector *dirs, t_opm_params *opm);
 
 /*
 **	FILE.C
@@ -70,6 +83,7 @@ t_list					*dir_contenttolist(const char *dirname);
 ** SORT.C
 */
 
+void 					sort(t_vector *v, t_opm_params *opm);
 void					sort_lexico(t_vector *v);
 
 #endif
