@@ -11,7 +11,7 @@ function print_result(){
   fi
 }
 
-options=(1 l R a r)
+options=(1 l R a r t)
 
 # TEST 1___________________
 
@@ -154,5 +154,41 @@ do
   ls -1$option tests testsempty | cat > real
   print_result $float $test_desc $option
   rm -rf mine real dif tests testsempty
+done
+echo ""
+
+# TEST 9____________________
+
+test_desc=without_param
+test_nbr=9
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  mkdir tests && cd tests && mkdir dir dir1 && touch file file1 dir/kikou dir1/.youyou
+  ../ft_ls -$option | cat > ../mine
+  ls -1$option | cat > ../real
+  cd ..
+  print_result $float $test_desc $option
+  rm -rf mine real dif tests
+done
+echo ""
+
+# TEST 10____________________
+
+test_desc=devices
+test_nbr=10
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  ./ft_ls -$option /dev/ | cat > mine
+  ls -1$option /dev/ | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif
 done
 echo ""
