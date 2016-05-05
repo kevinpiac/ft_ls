@@ -17,6 +17,7 @@
 #include "../libft/libft.h"
 #include <dirent.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
@@ -85,5 +86,26 @@ t_list					*dir_contenttolist(const char *dirname);
 
 void 					sort(t_vector *v, t_opm_params *opm);
 void					sort_lexico(t_vector *v);
+
+/*
+** GET.c
+*/
+
+char					*get_user(t_filedata *file);
+char					*get_group(t_filedata *file);
+char					*get_rights(t_filedata *file);
+
+char					get_filetype(t_filedata *file);
+
+/*
+** GET_2.c
+*/
+
+char					*get_time(t_filedata *file);
+
+int						get_total_blocks(t_vector *v);
+
+void 					get_padding(t_vector *v, int padding[]);
+
 
 #endif
