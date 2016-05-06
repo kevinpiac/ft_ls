@@ -24,6 +24,8 @@
 #include <string.h>
 #include <errno.h>
 
+#include <stdio.h>
+
 typedef struct		s_files
 {
 	t_vector		*files;
@@ -59,6 +61,7 @@ typedef struct			s_filedata
 
 t_filedata				*file_initdata(const char *basepath, char *filename);
 void					file_recursive(t_vector *v, t_opm_params *opm);
+
 /*
 **	PRINT.C
 */
@@ -77,7 +80,6 @@ t_bool				is_dir(const char *path);
 */
 
 char					*dir_storecontent(const char *dirname, t_vector *v, t_opm_params *opm);
-void					dir_showcontent(const char *dirname);
 t_list					*dir_contenttolist(const char *dirname);
 
 /*

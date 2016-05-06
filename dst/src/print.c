@@ -70,14 +70,16 @@ static void				print_long(t_vector *v)
 		ft_putstr(" ");
 		ft_putstr(get_time(file));
 		// should get and show link if is symlink
-		ft_putendl(file->filename);
+		ft_putstr(file->filename);
+		ft_putchar('\n'); //don't know why is faster.
 		i++;
 	}
 }
 
 static void			print_filename(t_filedata *file)
 {
-	ft_putendl(file->filename);
+	ft_putstr(file->filename);
+	ft_putchar('\n');
 }
 
 void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
@@ -88,7 +90,10 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 	if (dirname && once > 1)
 		ft_putendl("");
 	if (dirname && (once > 1 || opm->params->total > 1))// ok
-		ft_putendl(ft_strjoin(dirname, ":"));
+	{
+		ft_putstr(dirname);
+		ft_putendl(":");
+	}
 	once++;
 	if (opm_issetoption(opm->config, "l"))
 	{

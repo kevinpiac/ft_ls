@@ -26,7 +26,7 @@ char	*file_getpath(const char *basepath, char *filename)
 	return (path);
 }
 
-void	file_recursive(t_vector *v, t_opm_params *opm)
+void		file_recursive(t_vector *v, t_opm_params *opm)
 {
 	int			i;
 	t_filedata	*item;
