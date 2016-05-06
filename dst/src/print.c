@@ -16,7 +16,7 @@ void 				print_line_long(t_filedata *file, int p[])
 {
 	char		*line;
 
-	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 50);
+	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 250);
 	mode_set(file->stat->st_mode, line);
 	set_padding_r(ft_itoa(file->stat->st_nlink), line, p[0]);
 	ft_strcat(line, " ");
@@ -71,7 +71,7 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 	once = once ? once : 1;
 	if (dirname && once > 1)
 		ft_putendl("");
-	if (dirname && (once > 1 || opm->params->total > 1))// ok
+	if (dirname && (once > 1 || opm->params->total > 1))
 	{
 		ft_putstr(dirname);
 		ft_putendl(":");

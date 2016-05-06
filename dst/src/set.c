@@ -53,19 +53,15 @@ void 		set_padding_l(char *src, char *dst, int padding)
 
 void 				append_link(t_filedata *file, char *line)
 {
-	t_filedata 		*f;
-	char 			*linkname;
-	f = file;
-	return ;
-	linkname = ft_strnew(f->stat->st_size);
-	if (readlink(f->path, linkname, f->stat->st_size + 1) == -1)
-	{
-		perror("readlink");
+	char			buf[250];
+	int 			len;
+
+	if ((len = readlink(file->path, buf, sizeof(buf)-1)) != -1)
+	    buf[len] = '\0';
+	else
 		exit(-1);
-	}
 	ft_strcat(line, " -> ");
-	ft_strcat(line, linkname);
-	free(linkname);
+	ft_strcat(line, ft_strdup(buf));
 }
 
 void 				set_time(time_t time, char *line)
