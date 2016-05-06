@@ -95,9 +95,8 @@ void					sort_lexico(t_vector *v);
 
 char					*get_user(t_filedata *file);
 char					*get_group(t_filedata *file);
-char					*get_rights(t_filedata *file);
-
-char					get_filetype(t_filedata *file);
+char					*get_mode(mode_t st_mode);
+char					get_type(mode_t stmode);
 
 /*
 ** GET_2.c
@@ -108,6 +107,16 @@ char					*get_time(t_filedata *file);
 int						get_total_blocks(t_vector *v);
 
 void 					get_padding(t_vector *v, int padding[]);
+
+/*
+** MODE.C
+*/
+
+char 					mode_get_type(mode_t st_mode);
+
+void 					mode_set_owner(mode_t st_mode, char *mode);
+void 					mode_set_group(mode_t st_mode, char *mode);
+void 					mode_set_other(mode_t st_mode, char *mode);
 
 
 #endif

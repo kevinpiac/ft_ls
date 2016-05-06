@@ -51,8 +51,7 @@ static void				print_long(t_vector *v)
 	while (i < v->total)
 	{
 		file = ft_vectget(v, i);
-		ft_putstr(get_rights(file));
-		ft_putstr("  ");
+		ft_putstr(get_mode(file->stat->st_mode));
 		print_aligned(padding[0], ft_itoa(file->stat->st_nlink), 'r');
 		ft_putstr(" ");
 		print_aligned(padding[1], get_user(file), 'l');
