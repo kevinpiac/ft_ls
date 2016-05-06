@@ -12,19 +12,6 @@
 
 #include "ft_ls.h"
 
-char        *get_time(t_filedata *file)
-{
-	time_t		time;
-	char 			*d;
-	char			*date;
-
-	time = file->stat->st_mtime;
-	d = ft_strsub(ctime(&time), 4, 12);
-	date = ft_strjoin(d, " ");
-	free(d);
-	return (date);
-}
-
 int 		get_total_blocks(t_vector *v)
 {
 	int				i;

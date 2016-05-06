@@ -101,11 +101,18 @@ char					get_type(mode_t stmode);
 ** GET_2.c
 */
 
-char					*get_time(t_filedata *file);
-
 int						get_total_blocks(t_vector *v);
 
 void 					get_padding(t_vector *v, int padding[]);
+
+/*
+** SET.C
+*/
+
+void 					set_padding_l(char *src, char *dst, int padding);
+void 					set_padding_r(char *src, char *dst, int padding);
+void 					append_link(t_filedata *file, char *line);
+void 					set_time(time_t time, char *line);
 
 /*
 ** MODE.C

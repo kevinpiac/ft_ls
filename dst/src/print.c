@@ -12,58 +12,31 @@
 
 #include "ft_ls.h"
 
-void 		set_padding(char *src, char *dst, int padding, char direction)
-{
-	int 	len;
-	int 	i;
-	int 	j;
-	int 	pad;
-
-	len = ft_strlen(src);
-	pad = ABS(padding - len);
-	j = 0;
-	i = pad;
-	while (*dst)
-		++dst;
-	if (direction == 'r')
-	{
-		while (j < i)
-			dst[j++] = ' ';
-	}
-	i = 0;
-	while (src[i])
-		dst[j++] = src[i++];
-	if (direction == 'l')
-	{
-		while (j < pad)
-			dst[j++] = ' ';
-	}
-}
-
 void 				print_line_long(t_filedata *file, int p[])
 {
 	char		*line;
 
 	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 50);
 	mode_set(file->stat->st_mode, line);
-	set_padding(ft_itoa(file->stat->st_nlink), line, p[0], 'r');
+	set_padding_r(ft_itoa(file->stat->st_nlink), line, p[0]);
 	ft_strcat(line, " ");
-	set_padding(get_user(file), line, p[1], 'l');
-	ft_strcat(line, "  ");
-	set_padding(get_group(file), line, p[2], 'l');
-	ft_strcat(line, "  ");
+	set_padding_l(get_user(file), line, p[1]);
+//	ft_strcat(line, "  ");
+	set_padding_l(get_group(file), line, p[2]);
+//	ft_strcat(line, "  ");
 	if (S_ISCHR(file->stat->st_mode))
 	{
-		set_padding(ft_itoa(major(file->stat->st_rdev)), line, p[3], 'r');
+		set_padding_r(ft_itoa(major(file->stat->st_rdev)), line, p[3]);
 		ft_strcat(line, ", ");
-		set_padding(ft_itoa(minor(file->stat->st_rdev)), line, p[4], 'r');
+		set_padding_r(ft_itoa(minor(file->stat->st_rdev)), line, p[4]);
 	}
 	else
-		set_padding(ft_itoa(file->stat->st_size), line, p[5], 'r');
+		set_padding_r(ft_itoa(file->stat->st_size), line, p[5]);
 	ft_strcat(line, " ");
-	ft_strcat(line, get_time(file));
+	set_time(file->stat->st_mtime, line);
 	// should get and show link if is symlink
 	ft_strcat(line, file->filename);
+	S_ISLNK(file->stat->st_mode) ? append_link(file, line) : 1;
 	ft_putstr(line);
 	free(line);
 }
@@ -110,7 +83,7 @@ void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 		{
 			ft_putstr("total ");
 			ft_putnbr(get_total_blocks(v));
-			ft_putendl("");
+			ft_putchar('\n');
 		}
 		print_long(v);
 	}
