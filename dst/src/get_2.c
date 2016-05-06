@@ -57,7 +57,7 @@ void 			get_padding(t_vector *v, int padding[])
 	t_filedata 	*file;
 
 	i = 0;
-	while (i < 6)
+	while (i < 7)
 		padding[i++] = 0;
 	i = 0;
 	while (i < v->total)
@@ -80,6 +80,8 @@ void 			get_padding(t_vector *v, int padding[])
 		}
 		if (padding[5] < ft_numlen(file->stat->st_size))
 			padding[5] = ft_numlen(file->stat->st_size);
+		if (padding[6] < (int)ft_strlen(file->filename))
+			padding[6] = (int)ft_strlen(file->filename);
 		i++;
 	}
 }
