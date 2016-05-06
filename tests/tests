@@ -178,7 +178,7 @@ echo ""
 
 # TEST 10____________________
 
-test_desc=devices
+test_desc=all_files_modes
 test_nbr=10
 count=0
 for option in ${options[@]}
@@ -186,9 +186,15 @@ do
   :
   float=$test_nbr$dot$count
   ((count++))
-  ./ft_ls -$option /dev/ | cat > mine
-  ls -1$option /dev/ | cat > real
+  mkdir tests && cd tests && touch 1 2 3 4 5 6 7 8 9 a b c d e f g h && mkdir dir
+  chmod 000 1 && chmod 111 2 && chmod 333 3 && chmod 555 4 && chmod 777 5
+  chmod 4000 6 && chmod 2000 7 && chmod 1000 8 && chmod 0400 9 && chmod 0200 a
+  chmod 0100 b && chmod 0040 c && chmod 0020 d && chmod 0010 e && chmod 0004 f
+  chmod 0002 g && chmod 0001 h
+  cd ..
+  ./ft_ls -$option tests | cat > mine
+  ls -1$option tests | cat > real
   print_result $float $test_desc $option
-  rm -rf mine real dif
+  rm -rf mine real dif tests
 done
 echo ""
