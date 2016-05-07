@@ -23,7 +23,9 @@ void 				print_line_long(t_filedata *file, int p[])
 	set_padding_l(get_user(file), line, p[1]);
 //	ft_strcat(line, "  ");
 	set_padding_l(get_group(file), line, p[2]);
-//	ft_strcat(line, "  ");
+
+	if (p[3] || p[4])
+		ft_strcat(line, " ");
 	if (S_ISCHR(file->stat->st_mode))
 	{
 		set_padding_r(ft_itoa(major(file->stat->st_rdev)), line, p[3]);
