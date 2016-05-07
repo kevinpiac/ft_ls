@@ -12,81 +12,36 @@
 
 #include "ft_ls.h"
 
-void		sort_lexico(t_vector *v)
+static int 	modif_time(void *file1, void *file2)
 {
-	int			i;
-	t_filedata	*tmp;
-	t_filedata	*file;
-	t_filedata	*next;
+	t_filedata	*f1;
+	t_filedata 	*f2;
 
-	i = 0;
-	while (i < v->total - 1)
-	{
-		file = ft_vectget(v, i);
-		next = ft_vectget(v, i + 1);
-		if (ft_strcmp(file->filename, next->filename) > 0)
-		{
-			tmp = v->items[i];
-			v->items[i] = v->items[i + 1];
-			v->items[i + 1] = tmp;
-			i = -1;
-		}
-		i++;
-	}
+	f1 = (t_filedata *)file1;
+	f2 = (t_filedata *)file2;
+	if (f1->stat->st_mtime < f2->stat->st_mtime)
+		return (1);
+	return (0);
 }
 
-void		sort_lexico_inverted(t_vector *v)
+static int 	lexico(void *file1, void *file2)
 {
-	int			i;
-	t_filedata	*tmp;
-	t_filedata	*file;
-	t_filedata	*next;
+	t_filedata	*f1;
+	t_filedata 	*f2;
 
-	i = 0;
-	while (i < v->total - 1)
-	{
-		file = ft_vectget(v, i);
-		next = ft_vectget(v, i + 1);
-		if (ft_strcmp(file->filename, next->filename) < 0)
-		{
-			tmp = v->items[i];
-			v->items[i] = v->items[i + 1];
-			v->items[i + 1] = tmp;
-			i = -1;
-		}
-		i++;
-	}
-}
-
-static void sort_date(t_vector *v)
-{
-	int			i;
-	t_filedata	*tmp;
-	t_filedata	*file;
-	t_filedata	*next;
-
-	i = 0;
-	while (i < v->total - 1)
-	{
-		file = ft_vectget(v, i);
-		next = ft_vectget(v, i + 1);
-		if (file->stat->st_mtime < next->stat->st_mtime)
-		{
-			tmp = v->items[i];
-			v->items[i] = v->items[i + 1];
-			v->items[i + 1] = tmp;
-			i = -1;
-		}
-		i++;
-	}
+	f1 = (t_filedata *)file1;
+	f2 = (t_filedata *)file2;
+	if (ft_strcmp(f1->filename, f2->filename) > 0)
+		return (1);
+	return (0);
 }
 
 void 		sort(t_vector *v, t_opm_params *opm)
 {
 	if (opm_issetoption(opm->config, "r"))
-		sort_lexico_inverted(v);
+		ft_vectbubblesort(v, &lexico, -1);
 	else if (opm_issetoption(opm->config, "t"))
-		sort_date(v);
+		ft_vectbubblesort(v, &modif_time, 1);
 	else
-		sort_lexico(v);
+		ft_vectbubblesort(v, &lexico, 1);
 }
