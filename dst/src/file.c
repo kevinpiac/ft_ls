@@ -22,7 +22,7 @@ char	*file_getpath(const char *basepath, char *filename)
 	else
 		basepathendl = ft_strdup(basepath);
 	path = ft_strjoin(basepathendl, filename);
-//	free(basepathendl);
+	free(basepathendl);
 	return (path);
 }
 

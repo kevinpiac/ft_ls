@@ -44,7 +44,7 @@ void 		set_padding_l(char *src, char *dst, int padding)
 		++dst;
 	while (src[i])
 		dst[j++] = src[i++];
-	while (j < padding + 2) // 2 is to prevent strcat(line, " ") after.
+	while (j < padding + 2)
 	{
 		dst[j] = ' ';
 		j++;
