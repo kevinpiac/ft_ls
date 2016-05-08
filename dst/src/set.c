@@ -64,24 +64,26 @@ void 				append_link(t_filedata *file, char *line)
 	ft_strcat(line, ft_strdup(buf));
 }
 
-void 				set_time(time_t time, char *line)
+
+
+void 				set_time(time_t time_d, time_t tv_sec, char *line)
 {
 	char 	*date;
-	int 	start;
-	int		end;
+	char	*mdt;
 	int 	i;
+ 	int 	cur_time;
 
-	date = ctime(&time);
-	start = 4;
-	end = 16;
+	cur_time = time(NULL);
+	date = ctime(&time_d);
 	i = 0;
-	while (*line)
-		++line;
-	while (start < end)
-	{
-		line[i] = date[start];
-		start++;
-		i++;
-	}
-	line[i] = ' ';
+	mdt = ft_strsub(date, 4, 7);
+	ft_strcat(line, mdt);
+	free(mdt);
+	if (ABS(cur_time - tv_sec) > 15778458)
+		mdt = ft_strsub(date, 19, 5);
+	else
+		mdt = ft_strsub(date, 11, 5);
+	ft_strcat(line, mdt);
+	ft_strcat(line, " ");
+	free(mdt);
 }

@@ -19,14 +19,13 @@ int		main(int ac, char **av)
 	t_opm_params	*opm;
 	t_files			*to_list;
 
-
 	arm = arm_init(ac, av);
 	config = opm_config_init("l,r,a|All|all,R|Recursive|recursive,t,u,f,g,d");
 	opm = opm_init(arm, config);
 //	arm_debug(arm);
 //	opm_debug(opm);
 	if (!opm->params->total)
-		ft_vectadd(opm->params, arm_argument_new("./", "param"));
+		ft_vectadd(opm->params, arm_argument_new(".", "param"));
 	to_list = dispatch(opm);
 	sort(to_list->files, opm);
 	sort(to_list->dirs, opm);

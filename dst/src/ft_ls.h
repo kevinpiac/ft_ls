@@ -112,7 +112,7 @@ void 					get_padding(t_vector *v, int padding[]);
 void 					set_padding_l(char *src, char *dst, int padding);
 void 					set_padding_r(char *src, char *dst, int padding);
 void 					append_link(t_filedata *file, char *line);
-void 					set_time(time_t time, char *line);
+void 					set_time(time_t time, time_t tv_sec, char *line);
 
 /*
 ** MODE.C

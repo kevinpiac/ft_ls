@@ -33,10 +33,10 @@ void 				print_line_long(t_filedata *file, int p[])
 	else
 		set_padding_r(ft_itoa(file->stat->st_size), line, p[5]);
 	ft_strcat(line, " ");
-	set_time(file->stat->st_mtime, line);
+	set_time(file->stat->st_mtime, file->stat->st_mtimespec.tv_sec, line);
 	ft_strcat(line, file->filename);
 	S_ISLNK(file->stat->st_mode) ? append_link(file, line) : 1;
-	ft_putstr(line);
+	ft_putendl(line);
 	free(line);
 }
 
@@ -52,15 +52,13 @@ static void				print_long(t_vector *v)
 	{
 		file = ft_vectget(v, i);
 		print_line_long(file, padding);
-		ft_putchar('\n');
 		i++;
 	}
 }
 
 static void			print_filename(t_filedata *file)
 {
-	ft_putstr(file->filename);
-	ft_putchar('\n');
+	ft_putendl(file->filename);
 }
 
 void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
