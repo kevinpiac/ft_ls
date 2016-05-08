@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void 		set_padding_r(char *src, char *dst, int padding)
+void 				set_padding_r(char *src, char *dst, int padding)
 {
 	int 	len;
 	int 	i;
@@ -33,7 +33,7 @@ void 		set_padding_r(char *src, char *dst, int padding)
 		dst[j++] = src[i++];
 }
 
-void 		set_padding_l(char *src, char *dst, int padding)
+void 				set_padding_l(char *src, char *dst, int padding)
 {
 	int 	i;
 	int 	j;
@@ -63,8 +63,6 @@ void 				append_link(t_filedata *file, char *line)
 	ft_strcat(line, " -> ");
 	ft_strcat(line, ft_strdup(buf));
 }
-
-
 
 void 				set_time(time_t time_d, time_t tv_sec, char *line)
 {

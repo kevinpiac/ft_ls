@@ -198,3 +198,20 @@ do
   rm -rf mine real dif tests
 done
 echo ""
+
+# TEST 11____________________
+
+test_desc=all_bin_with_year_date_format
+test_nbr=11
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  ./ft_ls -$option /bin | cat > mine
+  ls -1$option /bin | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif
+done
+echo ""
