@@ -12,18 +12,6 @@
 
 #include "ft_ls.h"
 
-static int 	modif_time(void *file1, void *file2)
-{
-	t_filedata	*f1;
-	t_filedata 	*f2;
-
-	f1 = (t_filedata *)file1;
-	f2 = (t_filedata *)file2;
-	if (f1->stat->st_mtime < f2->stat->st_mtime)
-		return (1);
-	return (0);
-}
-
 static int 	lexico(void *file1, void *file2)
 {
 	t_filedata	*f1;
@@ -36,12 +24,33 @@ static int 	lexico(void *file1, void *file2)
 	return (0);
 }
 
+static int 	modif_time(void *file1, void *file2)
+{
+	t_filedata	*f1;
+	t_filedata 	*f2;
+
+	f1 = (t_filedata *)file1;
+	f2 = (t_filedata *)file2;
+	if (f1->stat->st_mtime == f2->stat->st_mtime)
+	{
+		if (f1->stat->st_mtimespec.tv_nsec == f2->stat->st_mtimespec.tv_nsec)
+			return (lexico(f1, f2));
+		if (f1->stat->st_mtimespec.tv_nsec < f2->stat->st_mtimespec.tv_nsec)
+			return (1);
+		return (0);
+	}
+	else if (f1->stat->st_mtimespec.tv_sec < f2->stat->st_mtimespec.tv_sec)
+		return (1);
+	return (0);
+}
+
 void 		sort(t_vector *v, t_opm_params *opm)
 {
-	if (opm_issetoption(opm->config, "r"))
-		ft_vectbubblesort(v, &lexico, -1);
-	else if (opm_issetoption(opm->config, "t"))
+	int		reverse;
+
+	reverse = opm_issetoption(opm->config, "r") ? -1 : 1;
+	if (opm_issetoption(opm->config, "t"))
 		ft_vectbubblesort(v, &modif_time, 1);
 	else
-		ft_vectbubblesort(v, &lexico, 1);
+		ft_vectbubblesort(v, &lexico, reverse);
 }

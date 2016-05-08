@@ -215,3 +215,21 @@ do
   rm -rf mine real dif
 done
 echo ""
+
+# TEST 12____________________
+options=(1 l a r t)
+
+test_desc=check_devices
+test_nbr=12
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  ./ft_ls -$option /dev | cat > mine
+  ls -1$option /dev | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif
+done
+echo ""
