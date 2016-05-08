@@ -22,9 +22,9 @@ void            list_dir(char *path, t_opm_params *opm)
     v = ft_vectnew();
     if ((error = dir_storecontent(path, v, opm)))
     {
-        if (opm->params->total > 1)
+        if (opm->params->total > 1 || opm_issetoption(opm->config, "R"))
             ft_putendl(ft_strjoin(path, ":"));
-        ft_putendl(error);
+        ft_putendl(ft_strjoin("ls: ", error));
     }
     else
     {

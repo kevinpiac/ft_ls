@@ -23,7 +23,7 @@ char 	*dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
 	else
 	{
 		if (!(dp = opendir(dirpath)))
-			return(ft_strjoin("ls: ", strerror(errno)));//			perror("ls");
+			return (strerror(errno));
 		else
 		{
 			while ((ret = readdir(dp)))
