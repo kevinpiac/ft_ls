@@ -44,6 +44,24 @@ void			file_recursive(t_vector *v, t_opm_params *opm)
 	}
 }
 
+void			file_del(void *this)
+{
+	t_filedata	*file;
+
+	file = (t_filedata *)this;
+	if (!file)
+		return ;
+	if (file->basepath)
+		free(file->basepath);
+	if (file->filename)
+		free(file->filename);
+	if (file->path)
+		free(file->path);
+	if (file->stat)
+		free(file->stat);
+	free(file);
+}
+
 t_filedata		*file_initdata(const char *basepath, char *filename)
 {
 	t_filedata	*filedata;

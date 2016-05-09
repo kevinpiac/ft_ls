@@ -59,6 +59,7 @@ typedef struct			s_filedata
 
 t_filedata				*file_initdata(const char *basepath, char *filename);
 void					file_recursive(t_vector *v, t_opm_params *opm);
+void					file_del(void *file);
 
 /*
 **	PRINT.C

@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -33,6 +34,7 @@ void			list_dir(char *path, t_opm_params *opm)
 		if (opm_issetoption(opm->config, "R"))
 			file_recursive(v, opm);
 	}
+	ft_vectdel(v, file_del);
 }
 
 void			list_files(t_vector *files, t_opm_params *opm)
