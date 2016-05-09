@@ -12,9 +12,9 @@
 
 #include "ft_ls.h"
 
-void 				print_line_long(t_filedata *file, int p[])
+void				print_line_long(t_filedata *file, int p[])
 {
-	char		*line;
+	char			*line;
 
 	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 250);
 	mode_set(file->stat->st_mode, line);
@@ -40,11 +40,11 @@ void 				print_line_long(t_filedata *file, int p[])
 	free(line);
 }
 
-static void				print_long(t_vector *v)
+static void			print_long(t_vector *v)
 {
-	int					i;
-	t_filedata			*file;
-	int 				padding[7];
+	int				i;
+	t_filedata		*file;
+	int				padding[7];
 
 	get_padding(v, padding);
 	i = 0;
@@ -63,7 +63,7 @@ static void			print_filename(t_filedata *file)
 
 void				print_all(char *dirname, t_vector *v, t_opm_params *opm)
 {
-	static int			once;
+	static int		once;
 
 	once = once ? once : 1;
 	if (dirname && once > 1)

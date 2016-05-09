@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char	*file_getpath(const char *basepath, char *filename)
+char			*file_getpath(const char *basepath, char *filename)
 {
 	char		*path;
 	char		*basepathendl;
@@ -26,7 +26,7 @@ char	*file_getpath(const char *basepath, char *filename)
 	return (path);
 }
 
-void		file_recursive(t_vector *v, t_opm_params *opm)
+void			file_recursive(t_vector *v, t_opm_params *opm)
 {
 	int			i;
 	t_filedata	*item;
@@ -44,7 +44,7 @@ void		file_recursive(t_vector *v, t_opm_params *opm)
 	}
 }
 
-t_filedata	*file_initdata(const char *basepath, char *filename)
+t_filedata		*file_initdata(const char *basepath, char *filename)
 {
 	t_filedata	*filedata;
 	struct stat	*stat;

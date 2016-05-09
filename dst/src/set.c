@@ -12,11 +12,11 @@
 
 #include "ft_ls.h"
 
-void 				set_padding_r(char *src, char *dst, int padding)
+void			set_padding_r(char *src, char *dst, int padding)
 {
-	int 	len;
-	int 	i;
-	int 	j;
+	int			len;
+	int			i;
+	int			j;
 
 	len = ft_strlen(src);
 	i = padding - len;
@@ -33,10 +33,10 @@ void 				set_padding_r(char *src, char *dst, int padding)
 		dst[j++] = src[i++];
 }
 
-void 				set_padding_l(char *src, char *dst, int padding)
+void			set_padding_l(char *src, char *dst, int padding)
 {
-	int 	i;
-	int 	j;
+	int			i;
+	int			j;
 
 	j = 0;
 	i = 0;
@@ -51,25 +51,25 @@ void 				set_padding_l(char *src, char *dst, int padding)
 	}
 }
 
-void 				append_link(t_filedata *file, char *line)
+void			append_link(t_filedata *file, char *line)
 {
-	char			buf[250];
-	int 			len;
+	char		buf[250];
+	int			len;
 
-	if ((len = readlink(file->path, buf, sizeof(buf)-1)) != -1)
-	    buf[len] = '\0';
+	if ((len = readlink(file->path, buf, sizeof(buf) - 1)) != -1)
+		buf[len] = '\0';
 	else
 		exit(-1);
 	ft_strcat(line, " -> ");
 	ft_strcat(line, ft_strdup(buf));
 }
 
-void 				set_time(time_t time_d, time_t tv_sec, char *line)
+void			set_time(time_t time_d, time_t tv_sec, char *line)
 {
-	char 	*date;
-	char	*mdt;
-	int 	i;
- 	int 	cur_time;
+	char		*date;
+	char		*mdt;
+	int			i;
+	int			cur_time;
 
 	cur_time = time(NULL);
 	date = ctime(&time_d);

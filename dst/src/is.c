@@ -12,20 +12,20 @@
 
 #include "ft_ls.h"
 
-t_bool    is_dir(const char *path)
+t_bool			is_dir(const char *path)
 {
-  struct stat *stat;
+	struct stat	*stat;
 
-  stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
-  lstat(path, stat);
-  return (S_ISDIR(stat->st_mode));
+	stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
+	lstat(path, stat);
+	return (S_ISDIR(stat->st_mode));
 }
 
-t_bool    is_reg(const char *path)
+t_bool			is_reg(const char *path)
 {
-  struct stat *stat;
+	struct stat	*stat;
 
-  stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
-  lstat(path, stat);
-  return (S_ISREG(stat->st_mode));
+	stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
+	lstat(path, stat);
+	return (S_ISREG(stat->st_mode));
 }

@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char 			mode_get_type(mode_t st_mode)
+char			mode_get_type(mode_t st_mode)
 {
 	if (S_ISBLK(st_mode))
 		return ('b');
@@ -30,7 +30,7 @@ char 			mode_get_type(mode_t st_mode)
 		return ('-');
 }
 
-void 			mode_set_owner(mode_t st_mode, char *mode)
+void			mode_set_owner(mode_t st_mode, char *mode)
 {
 	mode[0] = st_mode & S_IRUSR ? 'r' : '-';
 	mode[1] = st_mode & S_IWUSR ? 'w' : '-';
@@ -44,7 +44,7 @@ void 			mode_set_owner(mode_t st_mode, char *mode)
 		mode[2] = '-';
 }
 
-void 			mode_set_group(mode_t st_mode, char *mode)
+void			mode_set_group(mode_t st_mode, char *mode)
 {
 	mode[0] = st_mode & S_IRGRP ? 'r' : '-';
 	mode[1] = st_mode & S_IWGRP ? 'w' : '-';
@@ -58,7 +58,7 @@ void 			mode_set_group(mode_t st_mode, char *mode)
 		mode[2] = '-';
 }
 
-void 			mode_set_other(mode_t st_mode, char *mode)
+void			mode_set_other(mode_t st_mode, char *mode)
 {
 	mode[0] = st_mode & S_IROTH ? 'r' : '-';
 	mode[1] = st_mode & S_IWOTH ? 'w' : '-';

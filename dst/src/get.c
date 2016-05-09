@@ -34,7 +34,7 @@ char			*get_group(t_filedata *file)
 	return (ft_itoa(id));
 }
 
-void   			mode_set(mode_t st_mode, char *mode)
+void			mode_set(mode_t st_mode, char *mode)
 {
 	mode[0] = mode_get_type(st_mode);
 	mode_set_owner(st_mode, &mode[1]);

@@ -12,10 +12,10 @@
 
 #include "ft_ls.h"
 
-static int 	lexico(void *file1, void *file2)
+static int			lexico(void *file1, void *file2)
 {
 	t_filedata	*f1;
-	t_filedata 	*f2;
+	t_filedata	*f2;
 
 	f1 = (t_filedata *)file1;
 	f2 = (t_filedata *)file2;
@@ -24,10 +24,10 @@ static int 	lexico(void *file1, void *file2)
 	return (0);
 }
 
-static int 	modif_time(void *file1, void *file2)
+static int			modif_time(void *file1, void *file2)
 {
 	t_filedata	*f1;
-	t_filedata 	*f2;
+	t_filedata	*f2;
 
 	f1 = (t_filedata *)file1;
 	f2 = (t_filedata *)file2;
@@ -44,7 +44,7 @@ static int 	modif_time(void *file1, void *file2)
 	return (0);
 }
 
-void 		sort(t_vector *v, t_opm_params *opm)
+void				sort(t_vector *v, t_opm_params *opm)
 {
 	int		reverse;
 

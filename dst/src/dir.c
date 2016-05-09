@@ -12,7 +12,8 @@
 
 #include "ft_ls.h"
 
-char 	*dir_storecontent(const char *dirpath, t_vector *v, t_opm_params *opm)
+char			*dir_storecontent(const char *dirpath, t_vector *v,
+					t_opm_params *opm)
 {
 	DIR				*dp;
 	struct dirent	*ret;

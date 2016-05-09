@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-int 		get_total_blocks(t_vector *v)
+int					get_total_blocks(t_vector *v)
 {
 	int				i;
 	int				total;
@@ -29,7 +29,7 @@ int 		get_total_blocks(t_vector *v)
 	return (total);
 }
 
-static int		ft_numlen(int n)
+static int			ft_numlen(int n)
 {
 	if (n < 0)
 		return (ft_numlen(n * -1) + 1);
@@ -38,10 +38,10 @@ static int		ft_numlen(int n)
 	return (1);
 }
 
-void 			get_padding(t_vector *v, int padding[])
+void				get_padding(t_vector *v, int padding[])
 {
-	int 		i;
-	t_filedata 	*file;
+	int				i;
+	t_filedata		*file;
 
 	i = 0;
 	while (i < 7)

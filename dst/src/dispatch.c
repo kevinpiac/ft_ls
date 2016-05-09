@@ -12,31 +12,30 @@
 
 #include "ft_ls.h"
 
-t_files     *dispatch(t_opm_params *opm)
+t_files			*dispatch(t_opm_params *opm)
 {
-    t_files *to_list;
-    char    *error;
-    char    *path;
-    int     i;
+	t_files		*to_list;
+	char		*error;
+	char		*path;
+	int			i;
 
-    to_list = (t_files *)ft_memalloc(sizeof(t_files) * 1);
-    to_list->files = ft_vectnew();
-    to_list->dirs = ft_vectnew();
-    i = 0;
-    while (i < opm->params->total)
-    {
-        path = arm_getparam_name(opm->params, i);
-        if (is_reg(path))
-            ft_vectadd(to_list->files, file_initdata(path, NULL));
-        else if (is_dir(path))
-            ft_vectadd(to_list->dirs, file_initdata(path, NULL));
-        else
-        {
-            error = ft_strjoin("ls: ", path);
-            perror(error);
-        }
-
-        i++;
-    }
-    return (to_list);
+	to_list = (t_files *)ft_memalloc(sizeof(t_files) * 1);
+	to_list->files = ft_vectnew();
+	to_list->dirs = ft_vectnew();
+	i = 0;
+	while (i < opm->params->total)
+	{
+		path = arm_getparam_name(opm->params, i);
+		if (is_reg(path))
+			ft_vectadd(to_list->files, file_initdata(path, NULL));
+		else if (is_dir(path))
+			ft_vectadd(to_list->dirs, file_initdata(path, NULL));
+		else
+		{
+			error = ft_strjoin("ls: ", path);
+			perror(error);
+		}
+		i++;
+	}
+	return (to_list);
 }
