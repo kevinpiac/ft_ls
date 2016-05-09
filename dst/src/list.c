@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -61,4 +60,5 @@ void			list(t_files *to_list, t_opm_params *opm)
 {
 	list_files(to_list->files, opm);
 	list_directories(to_list->dirs, opm);
+	files_del(to_list);
 }

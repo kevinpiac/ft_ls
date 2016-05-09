@@ -31,6 +31,12 @@ typedef struct			s_files
 }						t_files;
 
 /*
+**	FILES.C
+*/
+
+void					files_del(void *this);
+
+/*
 **	DISPATCH.C
 */
 
