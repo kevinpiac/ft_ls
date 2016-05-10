@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   opm_config.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/11 15:13:31 by kpiacent          #+#    #+#             */
-/*   Updated: 2016/04/30 17:53:40 by kpiacent         ###   ########.fr       */
+/*   Created: 2016/02/03 10:37:12 by kpiacent          #+#    #+#             */
+/*   Updated: 2016/04/28 14:37:01 by kpiacent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
-
-int		main(int ac, char **av)
-{
-	t_vector		*arm;
-	t_vector		*config;
-	t_opm_params	*opm;
-	t_files			*to_list;
-
-	arm = arm_init(ac, av);
-	config = opm_config_init(OPM_CONFIG);
-	opm = opm_init(arm, config);
-	if (!opm->params->total)
-		ft_vectadd(opm->params, arm_argument_new(".", "param"));
-	sort(opm->params, opm);
-	to_list = dispatch(opm);
-	list(to_list, opm);
-	return (1);
-}
+#ifndef OPM_CONFIG_H
+# define OPM_CONFIG_H
+# define OPM_ERROR_MSG "OPM has detected an error in your request."
+# define OPM_PROGNAME "ls"
+# define OPM_CONFIG "\
+1\
+l|long,\
+r|reverse,\
+a|All|all,\
+R|Recursive|recursive,\
+t,\
+f|no_sort,\
+o:|only,\
+c:|contains"
+# define OPM_USAGE "[-1lraRtfo:c:] [files]"
+#endif

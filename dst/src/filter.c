@@ -20,13 +20,15 @@ t_bool		filter_is_to_store(t_opm_params *opm, char *filename)
 		return (true);
 	if (opm_issetoption(opm->config, "o"))
 	{
-		opt_param = opm_findoption_param(opm->config, "o");
+		if (!(opt_param = opm_findoption_param(opm->config, "o")))
+			opm_error("-o (--only) option requires a parameter");
 		if (!ft_strequ(opt_param, filename))
 			return (false);
 	}
 	if (opm_issetoption(opm->config, "c"))
 	{
-		opt_param = opm_findoption_param(opm->config, "c");
+		if (!(opt_param = opm_findoption_param(opm->config, "c")))
+			opm_error("-c (--contains) option requires a parameter");
 		if (!ft_strstr(filename, opt_param))
 			return (false);
 	}
