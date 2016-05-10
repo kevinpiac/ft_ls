@@ -38,6 +38,19 @@ static int			ft_numlen(int n)
 	return (1);
 }
 
+static void			set_minor_major_pad(t_filedata *file, int padding[])
+{
+	if (S_ISCHR(file->stat->st_mode))
+	{
+		if (padding[3] < ft_numlen(major(file->stat->st_rdev)))
+			padding[3] = ft_numlen(major(file->stat->st_rdev));
+		if (padding[4] < ft_numlen(minor(file->stat->st_rdev)))
+			padding[4] = ft_numlen(minor(file->stat->st_rdev));
+		if (padding[5] < padding[3] + padding[4] + 2)
+			padding[5] = padding[3] + padding[4] + 2;
+	}
+}
+
 void				get_padding(t_vector *v, int padding[])
 {
 	int				i;
@@ -56,15 +69,7 @@ void				get_padding(t_vector *v, int padding[])
 			padding[1] = (int)ft_strlen(get_user(file));
 		if (padding[2] < (int)ft_strlen(get_group(file)))
 			padding[2] = (int)ft_strlen(get_group(file));
-		if (S_ISCHR(file->stat->st_mode))
-		{
-			if (padding[3] < ft_numlen(major(file->stat->st_rdev)))
-				padding[3] = ft_numlen(major(file->stat->st_rdev));
-			if (padding[4] < ft_numlen(minor(file->stat->st_rdev)))
-				padding[4] = ft_numlen(minor(file->stat->st_rdev));
-			if (padding[5] < padding[3] + padding[4] + 2)
-				padding[5] = padding[3] + padding[4] + 2;
-		}
+		set_minor_major_pad(file, padding);
 		if (padding[5] < ft_numlen(file->stat->st_size))
 			padding[5] = ft_numlen(file->stat->st_size);
 		if (padding[6] < (int)ft_strlen(file->filename))
