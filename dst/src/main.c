@@ -20,7 +20,8 @@ int		main(int ac, char **av)
 	t_files			*to_list;
 
 	arm = arm_init(ac, av);
-	config = opm_config_init("l,r,a|All|all,R|Recursive|recursive,t,u,f,g,d");
+	config = opm_config_init("l|long,r|reverse,a|All|all,R|Recursive|recursive,\
+	t,u,f|no_sort");
 	opm = opm_init(arm, config);
 //	arm_debug(arm);
 //	opm_debug(opm);

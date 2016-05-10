@@ -51,6 +51,8 @@ void				sort(t_vector *v, t_opm_params *opm)
 	reverse = opm_issetoption(opm->config, "r") ? -1 : 1;
 	if (opm_issetoption(opm->config, "t"))
 		ft_vectbubblesort(v, &modif_time, reverse);
+	else if (opm_issetoption(opm->config, "f"))
+		return ;
 	else
 		ft_vectbubblesort(v, &lexico, reverse);
 }
