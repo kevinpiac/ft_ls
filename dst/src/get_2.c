@@ -40,7 +40,7 @@ static int			ft_numlen(int n)
 
 static void			set_minor_major_pad(t_filedata *file, int padding[])
 {
-	if (S_ISCHR(file->stat->st_mode))
+	if (S_ISCHR(file->stat->st_mode) || S_ISBLK(file->stat->st_mode))
 	{
 		if (padding[3] < ft_numlen(major(file->stat->st_rdev)))
 			padding[3] = ft_numlen(major(file->stat->st_rdev));
