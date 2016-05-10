@@ -21,10 +21,8 @@ int		main(int ac, char **av)
 
 	arm = arm_init(ac, av);
 	config = opm_config_init("l|long,r|reverse,a|All|all,R|Recursive|recursive,\
-	t,u,f|no_sort");
+	t,u,f|no_sort,o:|only,c:|contains");
 	opm = opm_init(arm, config);
-//	arm_debug(arm);
-//	opm_debug(opm);
 	if (!opm->params->total)
 		ft_vectadd(opm->params, arm_argument_new(".", "param"));
 	sort(opm->params, opm);

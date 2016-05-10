@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dir.c                                              :+:      :+:    :+:   */
+/*   filter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpiacent <kpiacent@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,31 +12,26 @@
 
 #include "ft_ls.h"
 
-char			*dir_storecontent(const char *dirpath, t_vector *v,
-					t_opm_params *opm)
+t_bool		filter_is_to_store(t_opm_params *opm, char *filename)
 {
-	DIR				*dp;
-	struct dirent	*ret;
-	t_filedata		*filedata;
+	char	*opt_param;
 
-	if (is_reg(dirpath))
-		ft_vectadd(v, file_initdata(dirpath, NULL));
-	else
+	if (opm_issetoption(opm->config, "a"))
+		return (true);
+	if (opm_issetoption(opm->config, "o"))
 	{
-		if (!(dp = opendir(dirpath)))
-			return (strerror(errno));
-		else
-		{
-			while ((ret = readdir(dp)))
-			{
-				if (filter_is_to_store(opm, ret->d_name))
-				{
-					filedata = file_initdata(dirpath, ret->d_name);
-					ft_vectadd(v, filedata);
-				}
-			}
-			(void)closedir(dp);
-		}
+		opt_param = opm_findoption_param(opm->config, "o");
+		if (!ft_strequ(opt_param, filename))
+			return (false);
 	}
-	return (NULL);
+	if (opm_issetoption(opm->config, "c"))
+	{
+		opt_param = opm_findoption_param(opm->config, "c");
+		if (!ft_strstr(filename, opt_param))
+			return (false);
+	}
+	if (filename[0] == '.')
+		return (false);
+	else
+		return (true);
 }
