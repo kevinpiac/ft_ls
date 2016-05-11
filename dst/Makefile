@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 CC = gcc
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 NAME = ft_ls
 L_DIR = libft
 F_DIR = src
