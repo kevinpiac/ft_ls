@@ -140,7 +140,7 @@ done
 echo ""
 
 # TEST 8____________________
-
+options=(1 l R a r t)
 test_desc=multiple_dirs_one_empty
 test_nbr=8
 count=0
@@ -158,7 +158,7 @@ done
 echo ""
 
 # TEST 9____________________
-
+options=(1 l R a r t ltr)
 test_desc=without_param
 test_nbr=9
 count=0

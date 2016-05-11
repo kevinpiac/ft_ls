@@ -77,7 +77,7 @@ void			set_time(time_t time_d, time_t tv_sec, char *line)
 	mdt = ft_strsub(date, 4, 7);
 	ft_strcat(line, mdt);
 	free(mdt);
-	if (ABS(cur_time - tv_sec) > 15778458)
+	if (cur_time - tv_sec > 15778458 || cur_time - tv_sec < -115778458)
 		mdt = ft_strsub(date, 19, 5);
 	else
 		mdt = ft_strsub(date, 11, 5);

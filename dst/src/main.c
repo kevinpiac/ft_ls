@@ -27,5 +27,8 @@ int		main(int ac, char **av)
 	sort(opm->params, opm);
 	to_list = dispatch(opm);
 	list(to_list, opm);
+	arm_destroy(arm);
+	opm_config_destroy(config);
+	opm_destroy(opm);
 	return (1);
 }
