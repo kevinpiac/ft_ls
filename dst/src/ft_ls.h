@@ -42,7 +42,6 @@ void					files_del(void *this);
 
 t_bool					filter_is_to_store(t_opm_params *opm, char *filename);
 
-
 /*
 **	DISPATCH.C
 */
