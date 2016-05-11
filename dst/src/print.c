@@ -16,7 +16,7 @@ void				print_line_long(t_filedata *file, int p[])
 {
 	char			*line;
 
-	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 250);
+	line = ft_strnew(p[0] + p[1] + p[2] + p[3] + p[4] + p[5] + p[6] + 99999);
 	mode_set(file->stat->st_mode, line);
 	set_padding_r(ft_itoa(file->stat->st_nlink), line, p[0]);
 	ft_strcat(line, " ");

@@ -31,11 +31,15 @@ int					get_total_blocks(t_vector *v)
 
 static int			ft_numlen(int n)
 {
-	if (n < 0)
-		return (ft_numlen(n * -1) + 1);
-	if (n >= 10)
-		return (ft_numlen(n / 10) + 1);
-	return (1);
+	int			i;
+
+	i = n < 0 ? 1 : 0;
+	while (n)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
 }
 
 static void			set_minor_major_pad(t_filedata *file, int padding[])
