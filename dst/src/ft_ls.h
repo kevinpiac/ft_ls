@@ -86,6 +86,7 @@ void					print_all(char *dirname, t_vector *v,
 
 t_bool					is_reg(const char *path);
 t_bool					is_dir(const char *path);
+t_bool					is_lnk(const char *path);
 
 /*
 **	DIR.C

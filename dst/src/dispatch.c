@@ -12,10 +12,17 @@
 
 #include "ft_ls.h"
 
+static void		case_link(const char *path, t_opm_params *opm, t_files *to_list)
+{
+	if (opm_issetoption(opm->config, "l"))
+		ft_vectadd(to_list->files, file_initdata(path, NULL));
+	else
+		ft_vectadd(to_list->dirs, file_initdata(ft_strjoin(path, "/"), NULL));
+}
+
 t_files			*dispatch(t_opm_params *opm)
 {
 	t_files		*to_list;
-	char		*error;
 	char		*path;
 	int			i;
 
@@ -30,11 +37,10 @@ t_files			*dispatch(t_opm_params *opm)
 			ft_vectadd(to_list->files, file_initdata(path, NULL));
 		else if (is_dir(path))
 			ft_vectadd(to_list->dirs, file_initdata(path, NULL));
+		else if (is_lnk(path))
+			case_link(path, opm, to_list);
 		else
-		{
-			error = ft_strjoin("ls: ", path);
-			perror(error);
-		}
+			perror(ft_strjoin("ls: ", path));
 		i++;
 	}
 	return (to_list);

@@ -238,7 +238,7 @@ echo ""
 options=(1 l R a r t ltr)
 
 test_desc=multiple_files_in_parameters
-test_nbr=14
+test_nbr=13
 count=0
 for option in ${options[@]}
 do
@@ -250,5 +250,38 @@ do
   ls -1$option tests/* | cat > real
   print_result $float $test_desc $option
   rm -rf mine real dif tests
+done
+echo ""
+
+# TEST 14____________________
+test_desc=relative_symlink_dir
+test_nbr=14
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  mkdir tests && cd tests && mkdir dir && ln -s dir link && cd dir && touch 1 2 3 4 5 6 7 8 9 0 sk sk ke bibi baba && cd ../..
+  ./ft_ls -$option tests/* | cat > mine
+  ls -1$option tests/* | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif tests
+done
+echo ""
+
+# TEST 15____________________
+test_desc=absolute_symlink_dir
+test_nbr=15
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  ./ft_ls -$option /etc | cat > mine
+  ls -1$option /etc | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif
 done
 echo ""

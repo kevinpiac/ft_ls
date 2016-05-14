@@ -29,3 +29,12 @@ t_bool			is_reg(const char *path)
 	lstat(path, stat);
 	return (S_ISREG(stat->st_mode));
 }
+
+t_bool			is_lnk(const char *path)
+{
+	struct stat	*stat;
+
+	stat = (struct stat *)ft_memalloc(sizeof(struct stat) * 1);
+	lstat(path, stat);
+	return (S_ISLNK(stat->st_mode));
+}
