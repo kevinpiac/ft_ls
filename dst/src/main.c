@@ -24,8 +24,9 @@ int		main(int ac, char **av)
 	opm = opm_init(arm, config);
 	if (!opm->params->total)
 		ft_vectadd(opm->params, arm_argument_new(".", "param"));
-	sort(opm->params, opm);
 	to_list = dispatch(opm);
+	sort(to_list->files, opm);
+	sort(to_list->dirs, opm);
 	list(to_list, opm);
 	arm_destroy(arm);
 	opm_config_destroy(config);

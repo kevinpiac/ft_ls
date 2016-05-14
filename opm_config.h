@@ -15,5 +15,5 @@
 # define OPM_ERROR_MSG "OPM has detected an error in your request."
 # define OPM_PROGNAME "ls"
 # define OPM_CONFIG "1,l|long,r,a|all,R|recur,t,f|no_sort,o:|only,c:|contains"
-# define OPM_USAGE "[-1lraRtfo:c:] [files]"
+# define OPM_USAGE "[-1lraRtfo:c:] [files...]"
 #endif
