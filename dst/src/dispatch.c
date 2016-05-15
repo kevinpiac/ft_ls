@@ -17,7 +17,7 @@ static void		case_link(const char *path, t_opm_params *opm, t_files *to_list)
 	if (opm_issetoption(opm->config, "l"))
 		ft_vectadd(to_list->files, file_initdata(path, NULL));
 	else
-		ft_vectadd(to_list->dirs, file_initdata(ft_strjoin(path, "/"), NULL));
+		ft_vectadd(to_list->dirs, file_initdata(path, NULL));
 }
 
 t_files			*dispatch(t_opm_params *opm)
