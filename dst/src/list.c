@@ -17,6 +17,8 @@ void			list_dir(char *path, t_opm_params *opm)
 	t_vector		*v;
 	int				i;
 	char			*error;
+	char			*error_prefix;
+	char			*error_msg;
 
 	i = 0;
 	v = ft_vectnew();
@@ -24,7 +26,9 @@ void			list_dir(char *path, t_opm_params *opm)
 	{
 		if (opm->params->total > 1 || opm_issetoption(opm->config, "R"))
 			ft_putendl(ft_strjoin(path, ":"));
-		ft_putendl(ft_strjoin("ls: ", error));
+		error_prefix = ft_strjoin("ls: ", path);
+		error_msg = ft_strjoin(error_prefix, ": ");
+		ft_putendl_fd(ft_strjoin(error_msg, error), 2);
 	}
 	else
 	{

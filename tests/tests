@@ -13,7 +13,7 @@ function print_result(){
 }
 
 options=(1 l R a r t ltr)
-
+rm -rf /tmp/ls_tests_logs
 # TEST 1___________________
 
 test_desc=Simple_directory_files
