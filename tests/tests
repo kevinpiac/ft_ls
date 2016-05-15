@@ -6,6 +6,7 @@ function print_result(){
   if [ -s dif ]
   then
     echo "TEST $1      FAIL - $2 with option -$3"
+	cat dif >> /tmp/ls_tests_logs
     else
     echo "TEST $1      OK"
   fi
@@ -271,7 +272,7 @@ done
 echo ""
 
 # TEST 15____________________
-test_desc=absolute_symlink_dir
+test_desc=absolute_symlink_dir_etc
 test_nbr=15
 count=0
 for option in ${options[@]}
@@ -281,6 +282,22 @@ do
   ((count++))
   ./ft_ls -$option /etc | cat > mine
   ls -1$option /etc | cat > real
+  print_result $float $test_desc $option
+  rm -rf mine real dif
+done
+echo ""
+
+# TEST 16____________________
+test_desc=absolute_symlink_dir_etc/
+test_nbr=16
+count=0
+for option in ${options[@]}
+do
+  :
+  float=$test_nbr$dot$count
+  ((count++))
+  ./ft_ls -$option /etc/ | cat > mine
+  ls -1$option /etc/ | cat > real
   print_result $float $test_desc $option
   rm -rf mine real dif
 done
